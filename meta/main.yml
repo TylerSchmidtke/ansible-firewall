@@ -3,7 +3,7 @@ dependencies: []
 
 galaxy_info:
   author: TylerSchmidtke
-  description: Simple iptables firewall management with inventory host/group rule management.
+  description: Simple iptables firewall management with inventory group based rule management.
   license: "license (MIT)"
   min_ansible_version: 2.0
   platforms:
