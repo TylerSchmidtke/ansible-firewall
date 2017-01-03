@@ -77,5 +77,8 @@ iptables_allow_icmp: true
 1. Add support for IPv6
 2. Add support for Redhat
 
+### License
+MIT
+
 ### Suggestions/Issues?
 File an issue, or open a PR.
