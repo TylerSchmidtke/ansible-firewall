@@ -46,11 +46,14 @@ iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('t
 
 # Allowed ports
 {% for rule in iptables_allowed_ports %}
-iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('tcp') }} --dports {{ rule.ports|join(',') }} -j ACCEPT
+iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('tcp') }} --match multiport --dports {{ rule.ports|join(',') }} -j ACCEPT
 {% endfor %}
 
-# Allow establishedand related connections
+# Allow established and related inbound connections
 iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# Allow established connections for outbound connections
+iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT
 
 {% if iptables_logging %}
 # Logging
