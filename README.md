@@ -24,7 +24,7 @@ iptables_logging: true
 iptables_flush_all: true # Prepend rules with iptables
 iptables_input_deny_all: true #Default INPUT policy is DROP
 iptables_forward_deny_all: true #Default FORWARD policy is DROP
-iptables_output_deny_all: false #Default INPUT policy is DROP
+iptables_output_deny_all: false #Default OUTPUT policy is ACCEPT
 
 iptables_allowed_ports:
   - ports:
