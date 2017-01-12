@@ -11,7 +11,8 @@ iptables_output_deny_all: false
 
 # Allowed port defaults
 iptables_allowed_tcp_ports:
-  - 22
+  - ports:
+    - 22
 iptables_allowed_udp_ports: []
 iptables_allowed_host_rules: []
 iptables_allowed_group_rules: []

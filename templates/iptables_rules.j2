@@ -34,24 +34,19 @@ iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
 
 # Allowed host rules
 {% for rule in iptables_allowed_host_rules %}
-iptables -A INPUT -p {{ rule.protocol | default('tcp') }} -s {{ rule.host }} --match multiport --dports {{ rule.ports|join(',') }} -j {{ rule.action | default('ACCEPT') }}
+iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('tcp') }} -s {{ rule.host }} --match multiport --dports {{ rule.ports|join(',') }} -j {{ rule.action | default('ACCEPT') }}
 {% endfor %}
 
 # Allowed group rules
 {% for rule in iptables_allowed_group_rules %}
 {% for host in groups[rule.group] %}
-iptables -A INPUT -p {{ rule.protocol | default('tcp') }} -s {{ host }} --match multiport --dports {{ rule.ports|join(',') }} -j {{ rule.action | default('ACCEPT') }}
+iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('tcp') }} -s {{ host }} --match multiport --dports {{ rule.ports|join(',') }} -j {{ rule.action | default('ACCEPT') }}
 {% endfor %}
 {% endfor %}
 
-# Allowed TCP ports
-{% for port in iptables_allowed_tcp_ports %}
-iptables -A INPUT -p tcp --dport {{ port }} -j ACCEPT
-{% endfor %}
-
-# Allowed UDP ports
-{% for port in iptables_allowed_udp_ports %}
-iptables -A INPUT -p udp --dport {{ port }} -j ACCEPT
+# Allowed ports
+{% for rule in iptables_allowed_ports %}
+iptables -A {{ rule.chain | default('INPUT') }} -p {{ rule.protocol | default('tcp') }} --dports {{ rule.ports|join(',') }} -j ACCEPT
 {% endfor %}
 
 # Allow establishedand related connections

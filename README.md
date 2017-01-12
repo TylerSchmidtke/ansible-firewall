@@ -1,6 +1,8 @@
 # ANSIBLE-FIREWALL
 ## iptables management
 
+[![Ansible Galaxy](https://img.shields.io/badge/role-ansible--firewall-blue.svg)](https://galaxy.ansible.com/TylerSchmidtke/firewall/)
+
 This role manages iptables rules on Debian/Ubuntu systems. It is designed to be simple to use and does not fully implement all features of iptables. If you need more advanced iptables configuration, I recommend writing the rules file manually or make a pull request to add functionality to this role.
 
 The role installs rules.v4 and iptables_load files which are used to load the rules.
@@ -37,10 +39,12 @@ iptables_allow_icmp: true
 - hosts: server
   roles:
     - role: ansible-firewall
-      iptables_allowed_tcp_ports:
-        - 22
-        - 80
-        - 443
+      iptables_allowed_ports:
+        - protocol: tcp
+          ports:
+            - 22
+            - 80
+            - 443
 
 # Allow incoming TCP 22, 80, and 443 and UDP 53 for a specific network
 - hosts: server
@@ -53,6 +57,7 @@ iptables_allow_icmp: true
             - 80
             - 443
         - host: 192.168.1.0/24
+          chain: OUTPUT
           ports:
             - 53
           protocol: udp
@@ -76,6 +81,8 @@ iptables_allow_icmp: true
 ### TODO
 1. Add support for IPv6
 2. Add support for Redhat
+3. Add support for systemd units
+4. Add support for ad-hoc rules
 
 ### License
 MIT
