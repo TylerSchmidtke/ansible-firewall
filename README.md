@@ -26,8 +26,9 @@ iptables_input_deny_all: true #Default INPUT policy is DROP
 iptables_forward_deny_all: true #Default FORWARD policy is DROP
 iptables_output_deny_all: false #Default INPUT policy is DROP
 
-iptables_allowed_tcp_ports:
-  - 22
+iptables_allowed_ports:
+  - ports:
+    - 22
 iptables_allowed_udp_ports: []
 iptables_allowed_host_rules: []
 iptables_allowed_group_rules: []
