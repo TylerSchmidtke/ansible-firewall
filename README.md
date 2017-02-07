@@ -16,20 +16,22 @@ Groups defined in ```iptables_allowed_group_rules``` include the hostnames/IPs a
 
 ###Default variables:
 ```
+---
 iptables_confdir: /etc/iptables
 iptables_rules_path: "{{ iptables_confdir }}/rules.v4"
 iptables_load_path: /etc/network/if-up.d/iptables_load
 
+iptables_autoload: true
 iptables_logging: true
-iptables_flush_all: true # Prepend rules with iptables
-iptables_input_deny_all: true #Default INPUT policy is DROP
-iptables_forward_deny_all: true #Default FORWARD policy is DROP
-iptables_output_deny_all: false #Default OUTPUT policy is ACCEPT
+iptables_flush_all: true
+iptables_input_deny_all: true
+iptables_forward_deny_all: true
+iptables_output_deny_all: false
 
+# Allowed port defaults
 iptables_allowed_ports:
   - ports:
     - 22
-iptables_allowed_udp_ports: []
 iptables_allowed_host_rules: []
 iptables_allowed_group_rules: []
 iptables_allow_icmp: true

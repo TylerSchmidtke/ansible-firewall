@@ -21,7 +21,7 @@
   file:
     state: directory
     path: /etc/network/if-up.d
-  when: iptables_load_path
+  when: iptables_autoload
 
 - name: Prepare iptables rules
   template:
@@ -39,4 +39,4 @@
     owner: root
     group: root
     mode: 750
-  when: iptables_load_path
+  when: iptables_autoload
